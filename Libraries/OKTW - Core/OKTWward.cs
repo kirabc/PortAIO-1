@@ -33,7 +33,7 @@ namespace OneKeyToWin_AIO_Sebby.Core
         private bool rengar;
         private AIHeroClient Vayne;
 
-        private Item VisionWard = new Item(ItemId.Vision_Ward, 550);
+        private Item VisionWard = new Item(ItemId.Control_Ward, 550);
         private Item Sweep = new Item(ItemId.Sweeping_Lens_Trinket, 550);
         private Item OracleLens = new Item(ItemId.Oracle_Alteration, 550);
         private Item TrinketN = new Item(ItemId.Warding_Totem_Trinket, 600);

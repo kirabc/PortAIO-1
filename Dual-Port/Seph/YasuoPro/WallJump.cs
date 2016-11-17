@@ -33,7 +33,7 @@ using EloBuddy.SDK;
                         return item;
                     }
 
-                    if (item.Id == ItemId.Vision_Ward)
+                    if (item.Id == ItemId.Control_Ward)
                     {
                         return item;
                     }
