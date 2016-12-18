@@ -545,9 +545,11 @@ namespace ElZilean
             {
                 var pred = Q.GetPrediction(target);
                 if (pred.HitChance >= EloBuddy.SDK.Enumerations.HitChance.High)
-                {
+                {   
                     Q.Cast(pred.CastPosition);
-                     W.Cast();
+                    Q.Cast(pred.CastPosition);
+                    Q.Cast(pred.CastPosition);
+                    W.Cast();
                     Q.Cast(pred.CastPosition);
                 }
             }
