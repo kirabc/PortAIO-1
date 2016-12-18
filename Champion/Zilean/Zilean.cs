@@ -368,26 +368,31 @@ namespace ElZilean
         /// </summary>
         private static void OnCombo()
         {
-            
+            {
                 var target = TargetSelector.GetTarget(Q.Range, DamageType.Magical);
-                var pred = Q.GetPrediction(target);
                 if (target == null || target.IsDead)
                 { return; }
-               
-                if (getCheckBoxItem(comboMenu, "ElZilean.Combo.Q") && Q.IsReady() && target.IsValidTarget(Q.Range))
+                var isBombed2 = HeroManager.Enemies.Find(x => x.HasBuff("ZileanQEnemyBomb") && x.IsValidTarget(Q.Range));
+                if (getCheckBoxItem(comboMenu, "ElZilean.Combo.Q") && Q.IsReady() && target.IsValidTarget(Q.Range) && !isBombed2.IsValidTarget(Q.Range))
                 {
-                    
-                    if (red.HitChance >= EloBuddy.SDK.Enumerations.HitChance.High)
+                    var pred = Q.GetPrediction(target);
+                    if (QDmg(target) >= target.Health + target.HPRegenRate && pred.HitChance >= EloBuddy.SDK.Enumerations.HitChance.High && !isBombed2.IsValidTarget())
                     {
                         Q.Cast(pred.CastPosition);
-                        W.Cast();
-                        Q.Cast(pred.CastPosition);
-                        
                     }
-               
+                    if (pred.HitChance >= EloBuddy.SDK.Enumerations.HitChance.High && !isBombed2.IsValidTarget())
+                    {
+                        Q.Cast(pred.CastPosition);
+                    }
                 }
-              
-                
+                if (getCheckBoxItem(comboMenu, "ElZilean.Combo.Q") && Q.IsReady() && isBombed2.IsValidTarget(Q.Range) && isBombed2.IsValidTarget())
+                {
+                    var pred = Q.GetPrediction(isBombed2);
+                    if (pred.HitChance >= EloBuddy.SDK.Enumerations.HitChance.High)
+                    {
+                        Utility.DelayAction.Add(50, () => Q.Cast(pred.CastPosition));
+                    }
+                }
                 if (!Q.IsReady())
                 {
                     if (QDmg(target) >= target.Health + target.HPRegenRate && W.IsReady())
@@ -399,8 +404,32 @@ namespace ElZilean
                         W.Cast();
                     }
                 }
-               
-              
+                // Check if target has a bomb
+                var isBombed = HeroManager.Enemies.Find(x => x.HasBuff("ZileanQEnemyBomb") && x.IsValidTarget(Q.Range));
+                if (!isBombed.IsValidTarget())
+                {
+                    return;
+                }
+
+                if (isBombed != null && isBombed.IsValidTarget(Q.Range))
+                {
+                    if (Q.IsReady())
+                    {
+                        return;
+                    }
+
+                    if (getCheckBoxItem(comboMenu, "ElZilean.Combo.W"))
+                    {
+                        W.Cast();
+                    }
+                }
+
+                if (getCheckBoxItem(comboMenu, "ElZilean.Combo.W") && getCheckBoxItem(comboMenu, "ElZilean.Combo.W2") && W.IsReady() && !Q.IsReady())
+                {
+                    if (!Q.IsReady())
+                    W.Cast();
+                }
+
                 if (getCheckBoxItem(comboMenu, "ElZilean.Combo.E") && E.IsReady())
                 {
                     if (Player.GetEnemiesInRange(E.Range).Any())
@@ -419,8 +448,24 @@ namespace ElZilean
                     }
                 }
 
-           
+                if (getCheckBoxItem(comboMenu, "ElZilean.Ignite") && isBombed != null)
+                {
+                    if (Player.GetSpellSlot("summonerdot") == SpellSlot.Unknown)
+                    {
+                        return;
+                    }
+
+                    if (QDmg(isBombed) + IgniteSpell.GetDamage(isBombed) > isBombed.Health)
+                    {
+                        if (isBombed.IsValidTarget(Q.Range))
+                        {
+                            Player.Spellbook.CastSpell(IgniteSpell.Slot, isBombed);
+                        }
+                    }
+                }
+            }
         }
+
 
         /// <summary>
         ///     Called when the game draws itself.
