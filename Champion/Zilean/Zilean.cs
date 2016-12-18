@@ -376,7 +376,7 @@ namespace ElZilean
                 {
                     Q.Cast(pred666.CastPosition);
                     Q.Cast(pred666.CastPosition);
-                    Utility.DelayAction.Add(50, () => Q.Cast(pred.CastPosition));
+                    Utility.DelayAction.Add(50, () => Q.Cast(pred666.CastPosition));
                     W.Cast();
                     Q.Cast(pred666.CastPosition);
                     
