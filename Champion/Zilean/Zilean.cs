@@ -375,7 +375,7 @@ namespace ElZilean
                 if (getCheckBoxItem(comboMenu, "ElZilean.Combo.Q") && Q.IsReady() && target.IsValidTarget(Q.Range))
                 {
                     Q.Cast(pred666.CastPosition);
-                    W.Cast();
+                    Utility.DelayAction.Add(50, () => W.Cast());
                     Q.Cast(pred666.CastPosition);
                 }
                 
