@@ -372,37 +372,20 @@ namespace ElZilean
                 var target = TargetSelector.GetTarget(Q.Range, DamageType.Magical);
                 if (target == null || target.IsDead)
                 { return; }
-                var isBombed2 = HeroManager.Enemies.Find(x => x.HasBuff("ZileanQEnemyBomb") && x.IsValidTarget(Q.Range));
                 if (getCheckBoxItem(comboMenu, "ElZilean.Combo.Q") && Q.IsReady() && target.IsValidTarget(Q.Range))
                 {
                     var pred = Q.GetPrediction(target);
-                    if (QDmg(target) >= target.Health + target.HPRegenRate && pred.HitChance >= EloBuddy.SDK.Enumerations.HitChance.High && target.IsValidTarget(Q.Range) )
+                    if (red.HitChance >= EloBuddy.SDK.Enumerations.HitChance.High)
                     {
                         Q.Cast(pred.CastPosition);
                         W.Cast();
-                        var pred1 = Q.GetPrediction(target);
-                        Q.Cast(pred1.CastPosition));
+                        Q.Cast(pred.CastPosition);
                         
                     }
-                    if (pred.HitChance >= EloBuddy.SDK.Enumerations.HitChance.High && !isBombed2.IsValidTarget())
-                    {
-                        Q.Cast(pred.CastPosition);
-                        W.Cast();
-                        var pred1 = Q.GetPrediction(target);
-                        Q.Cast(pred1.CastPosition));
-                    }
+               
                 }
-                if (getCheckBoxItem(comboMenu, "ElZilean.Combo.Q") && Q.IsReady() && isBombed2.IsValidTarget(Q.Range) && isBombed2.IsValidTarget())
-                {
-                    var pred = Q.GetPrediction(isBombed2);
-                    if (pred.HitChance >= EloBuddy.SDK.Enumerations.HitChance.High)
-                    {
-                        Q.Cast(pred.CastPosition);
-                        W.Cast();
-                        var pred1 = Q.GetPrediction(target);
-                        Utility.DelayAction.Add(50, () => Q.Cast(pred1.CastPosition));
-                    }
-                }
+              
+                
                 if (!Q.IsReady())
                 {
                     if (QDmg(target) >= target.Health + target.HPRegenRate && W.IsReady())
@@ -434,22 +417,7 @@ namespace ElZilean
                     }
                 }
 
-                if (getCheckBoxItem(comboMenu, "ElZilean.Ignite") && isBombed != null)
-                {
-                    if (Player.GetSpellSlot("summonerdot") == SpellSlot.Unknown)
-                    {
-                        return;
-                    }
-
-                    if (QDmg(isBombed) + IgniteSpell.GetDamage(isBombed) > isBombed.Health)
-                    {
-                        if (isBombed.IsValidTarget(Q.Range))
-                        {
-                            Player.Spellbook.CastSpell(IgniteSpell.Slot, isBombed);
-                        }
-                    }
-                }
-            }
+           }
         }
 
         /// <summary>
@@ -530,19 +498,6 @@ namespace ElZilean
                 W.Cast();
             }
 
-            // Check if target has a bomb
-            var isBombed =
-                HeroManager.Enemies.FirstOrDefault(x => x.HasBuff("ZileanQEnemyBomb") && x.IsValidTarget(Q.Range));
-
-            if (!isBombed.IsValidTarget())
-            {
-                return;
-            }
-
-            if (getCheckBoxItem(harassMenu, "ElZilean.Harass.W"))
-            {
-                W.Cast();
-            }
         }
 
         private static void OnInterruptableTarget(AIHeroClient sender, Interrupter2.InterruptableTargetEventArgs args)
