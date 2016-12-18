@@ -368,13 +368,15 @@ namespace ElZilean
         /// </summary>
         private static void OnCombo()
         {
-            {
+            
                 var target = TargetSelector.GetTarget(Q.Range, DamageType.Magical);
+                var pred = Q.GetPrediction(target);
                 if (target == null || target.IsDead)
                 { return; }
+               
                 if (getCheckBoxItem(comboMenu, "ElZilean.Combo.Q") && Q.IsReady() && target.IsValidTarget(Q.Range))
                 {
-                    var pred = Q.GetPrediction(target);
+                    
                     if (red.HitChance >= EloBuddy.SDK.Enumerations.HitChance.High)
                     {
                         Q.Cast(pred.CastPosition);
@@ -417,7 +419,7 @@ namespace ElZilean
                     }
                 }
 
-           }
+           
         }
 
         /// <summary>
