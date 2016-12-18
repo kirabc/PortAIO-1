@@ -366,12 +366,19 @@ namespace ElZilean
         /// <summary>
         ///     Combo logic
         /// </summary>
+        
         private static void OnCombo()
         {
             {
                 var target = TargetSelector.GetTarget(Q.Range, DamageType.Magical);
-                if (target == null || target.IsDead)
-                { return; }
+                var pred666 = Q.GetPrediction(target);
+                if (getCheckBoxItem(comboMenu, "ElZilean.Combo.Q") && Q.IsReady() && target.IsValidTarget(Q.Range))
+                {
+                    Q.Cast(pred666.CastPosition);
+                    W.Cast();
+                    Q.Cast(pred666.CastPosition);
+                }
+                
                 var isBombed2 = HeroManager.Enemies.Find(x => x.HasBuff("ZileanQEnemyBomb") && x.IsValidTarget(Q.Range));
                 if (getCheckBoxItem(comboMenu, "ElZilean.Combo.Q") && Q.IsReady() && target.IsValidTarget(Q.Range) && !isBombed2.IsValidTarget(Q.Range))
                 {
