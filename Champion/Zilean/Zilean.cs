@@ -184,7 +184,7 @@ namespace ElZilean
                 IncomingDamageManager.Skillshots = true;
 
 
-                Q = new EloBuddy.SDK.Spell.Skillshot(SpellSlot.Q, 900 + 100, EloBuddy.SDK.Enumerations.SkillShotType.Circular, 300, 2000, 100);
+                Q = new EloBuddy.SDK.Spell.Skillshot(SpellSlot.Q, 800 + 100, EloBuddy.SDK.Enumerations.SkillShotType.Circular, 300, 2000, 100);
                 W = new Spell(SpellSlot.W, Player.GetAutoAttackRange(Player));
                 E = new Spell(SpellSlot.E, 700f);
                 R = new Spell(SpellSlot.R, 900f);
@@ -375,7 +375,7 @@ namespace ElZilean
                 if (getCheckBoxItem(comboMenu, "ElZilean.Combo.Q") && Q.IsReady() && target.IsValidTarget(Q.Range))
                 {
                     Q.Cast(pred666.CastPosition);
-                    Utility.DelayAction.Add(50, () => W.Cast());
+                    W.Cast();
                     Q.Cast(pred666.CastPosition);
                 }
                 
