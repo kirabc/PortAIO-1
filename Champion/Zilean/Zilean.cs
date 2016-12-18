@@ -373,12 +373,16 @@ namespace ElZilean
                 if (target == null || target.IsDead)
                 { return; }
                 var isBombed2 = HeroManager.Enemies.Find(x => x.HasBuff("ZileanQEnemyBomb") && x.IsValidTarget(Q.Range));
-                if (getCheckBoxItem(comboMenu, "ElZilean.Combo.Q") && Q.IsReady() && target.IsValidTarget(Q.Range) && !isBombed2.IsValidTarget(Q.Range))
+                if (getCheckBoxItem(comboMenu, "ElZilean.Combo.Q") && Q.IsReady() && target.IsValidTarget(Q.Range))
                 {
                     var pred = Q.GetPrediction(target);
-                    if (QDmg(target) >= target.Health + target.HPRegenRate && pred.HitChance >= EloBuddy.SDK.Enumerations.HitChance.High && !isBombed2.IsValidTarget())
+                    if (QDmg(target) >= target.Health + target.HPRegenRate && pred.HitChance >= EloBuddy.SDK.Enumerations.HitChance.High && target.IsValidTarget(Q.Range) )
                     {
                         Q.Cast(pred.CastPosition);
+                        W.Cast();
+                        var pred1 = Q.GetPrediction(target);
+                        Utility.DelayAction.Add(50, () => Q.Cast(pred1.CastPosition));
+                        
                     }
                     if (pred.HitChance >= EloBuddy.SDK.Enumerations.HitChance.High && !isBombed2.IsValidTarget())
                     {
