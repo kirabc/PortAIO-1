@@ -381,12 +381,15 @@ namespace ElZilean
                         Q.Cast(pred.CastPosition);
                         W.Cast();
                         var pred1 = Q.GetPrediction(target);
-                        Utility.DelayAction.Add(50, () => Q.Cast(pred1.CastPosition));
+                        Q.Cast(pred1.CastPosition));
                         
                     }
                     if (pred.HitChance >= EloBuddy.SDK.Enumerations.HitChance.High && !isBombed2.IsValidTarget())
                     {
                         Q.Cast(pred.CastPosition);
+                        W.Cast();
+                        var pred1 = Q.GetPrediction(target);
+                        Q.Cast(pred1.CastPosition));
                     }
                 }
                 if (getCheckBoxItem(comboMenu, "ElZilean.Combo.Q") && Q.IsReady() && isBombed2.IsValidTarget(Q.Range) && isBombed2.IsValidTarget())
@@ -394,7 +397,10 @@ namespace ElZilean
                     var pred = Q.GetPrediction(isBombed2);
                     if (pred.HitChance >= EloBuddy.SDK.Enumerations.HitChance.High)
                     {
-                        Utility.DelayAction.Add(50, () => Q.Cast(pred.CastPosition));
+                        Q.Cast(pred.CastPosition);
+                        W.Cast();
+                        var pred1 = Q.GetPrediction(target);
+                        Utility.DelayAction.Add(50, () => Q.Cast(pred1.CastPosition));
                     }
                 }
                 if (!Q.IsReady())
@@ -408,32 +414,8 @@ namespace ElZilean
                         W.Cast();
                     }
                 }
-                // Check if target has a bomb
-                var isBombed = HeroManager.Enemies.Find(x => x.HasBuff("ZileanQEnemyBomb") && x.IsValidTarget(Q.Range));
-                if (!isBombed.IsValidTarget())
-                {
-                    return;
-                }
-
-                if (isBombed != null && isBombed.IsValidTarget(Q.Range))
-                {
-                    if (Q.IsReady())
-                    {
-                        return;
-                    }
-
-                    if (getCheckBoxItem(comboMenu, "ElZilean.Combo.W"))
-                    {
-                        W.Cast();
-                    }
-                }
-
-                if (getCheckBoxItem(comboMenu, "ElZilean.Combo.W") && getCheckBoxItem(comboMenu, "ElZilean.Combo.W2") && W.IsReady() && !Q.IsReady())
-                {
-                    if (!Q.IsReady())
-                    W.Cast();
-                }
-
+               
+              
                 if (getCheckBoxItem(comboMenu, "ElZilean.Combo.E") && E.IsReady())
                 {
                     if (Player.GetEnemiesInRange(E.Range).Any())
