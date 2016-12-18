@@ -544,14 +544,10 @@ namespace ElZilean
                 if (pred.HitChance >= EloBuddy.SDK.Enumerations.HitChance.High)
                 {
                     Q.Cast(pred.CastPosition);
+                     W.Cast();
+                    Q.Cast(pred.CastPosition);
                 }
             }
-
-            if (getCheckBoxItem(harassMenu, "ElZilean.Harass.W") && W.IsReady() && !Q.IsReady())
-            {
-                W.Cast();
-            }
-
         }
 
         private static void OnInterruptableTarget(AIHeroClient sender, Interrupter2.InterruptableTargetEventArgs args)
