@@ -372,6 +372,24 @@ namespace ElZilean
             {
                 var target = TargetSelector.GetTarget(Q.Range, DamageType.Magical);
                 var pred666 = Q.GetPrediction(target);
+                if (getCheckBoxItem(comboMenu, "ElZilean.Combo.E") && E.IsReady() && !Q.IsReady())
+                {
+                    if (Player.GetEnemiesInRange(E.Range).Any())
+                    {
+                        var closestEnemy =
+                            Player.GetEnemiesInRange(E.Range)
+                                .OrderByDescending(h => (h.PhysicalDamageDealtPlayer + h.MagicDamageDealtPlayer))
+                                .FirstOrDefault();
+
+                        if (closestEnemy == null || closestEnemy.HasBuffOfType(BuffType.Stun))
+                        {
+                            return;
+                        }
+
+                        E.Cast(closestEnemy);
+                    }
+                }
+                
                 if (getCheckBoxItem(comboMenu, "ElZilean.Combo.Q") && target.IsValidTarget(Q.Range))
                 {
                     Q.Cast(pred666.CastPosition);
@@ -442,8 +460,8 @@ namespace ElZilean
                     if (!Q.IsReady())
                     W.Cast();
                 }
-                */
-                if (getCheckBoxItem(comboMenu, "ElZilean.Combo.E") && E.IsReady())
+                
+                if (getCheckBoxItem(comboMenu, "ElZilean.Combo.E") && E.IsReady() && !Q.IsReady())
                 {
                     if (Player.GetEnemiesInRange(E.Range).Any())
                     {
@@ -545,15 +563,15 @@ namespace ElZilean
                 return;
             }
 
-            if (getCheckBoxItem(harassMenu, "ElZilean.Harass.Q") && Q.IsReady() && target.LSIsValidTarget(Q.Range))
+            if (getCheckBoxItem(harassMenu, "ElZilean.Harass.Q") && target.LSIsValidTarget(Q.Range))
             {
-                var pred = Q.GetPrediction(target);
-                if (pred.HitChance >= EloBuddy.SDK.Enumerations.HitChance.High)
-                {   
-                    Q.Cast(pred.CastPosition);
-                    W.Cast();
-                    
-                }
+               Q.Cast(pred666.CastPosition);
+                    if (!Q.IsReady())
+                    { 
+                        W.Cast();
+                        Q.Cast(pred666.CastPosition);
+                    }
+                    return;
             }
         }
 
