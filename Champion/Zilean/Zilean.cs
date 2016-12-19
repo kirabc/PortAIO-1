@@ -356,10 +356,15 @@ namespace ElZilean
 
         private static void MouseCombo()
         {
-            if (getCheckBoxItem(comboMenu, "ElZilean.Combo.Q") && Q.IsReady())
+            if (getCheckBoxItem(comboMenu, "ElZilean.Combo.Q"))
             {
                 Q.Cast(Game.CursorPos);
-                W.Cast();
+                 if (!Q.IsReady())
+                    { 
+                        W.Cast();
+                    }
+                    return;
+                
             }
         }
 
