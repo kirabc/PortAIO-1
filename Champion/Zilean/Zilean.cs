@@ -566,6 +566,7 @@ namespace ElZilean
 
             if (getCheckBoxItem(harassMenu, "ElZilean.Harass.Q") && target.LSIsValidTarget(Q.Range))
             {
+               var pred666 = Q.GetPrediction(target);
                Q.Cast(pred666.CastPosition);
                     if (!Q.IsReady())
                     { 
