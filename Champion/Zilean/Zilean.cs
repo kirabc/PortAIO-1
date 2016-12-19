@@ -375,12 +375,10 @@ namespace ElZilean
                 if (getCheckBoxItem(comboMenu, "ElZilean.Combo.Q") && Q.IsReady() && target.IsValidTarget(Q.Range))
                 {
                     Q.Cast(pred666.CastPosition);
-                    /*
                     Q.Cast(pred666.CastPosition);
-                    Utility.DelayAction.Add(50, () => Q.Cast(pred666.CastPosition));
-                    */
+                    Utility.DelayAction.Add(100, () => Q.Cast(pred666.CastPosition));
                     W.Cast();
-                                        
+                    Q.Cast(pred666.CastPosition);                    
                 }
                 /*
                 var isBombed2 = HeroManager.Enemies.Find(x => x.HasBuff("ZileanQEnemyBomb") && x.IsValidTarget(Q.Range));
