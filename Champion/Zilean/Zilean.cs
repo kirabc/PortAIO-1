@@ -375,13 +375,14 @@ namespace ElZilean
                 if (getCheckBoxItem(comboMenu, "ElZilean.Combo.Q") && Q.IsReady() && target.IsValidTarget(Q.Range))
                 {
                     Q.Cast(pred666.CastPosition);
+                    /*
                     Q.Cast(pred666.CastPosition);
                     Utility.DelayAction.Add(50, () => Q.Cast(pred666.CastPosition));
+                    */
                     W.Cast();
-                    Q.Cast(pred666.CastPosition);
-                    
+                                        
                 }
-                
+                /*
                 var isBombed2 = HeroManager.Enemies.Find(x => x.HasBuff("ZileanQEnemyBomb") && x.IsValidTarget(Q.Range));
                 if (getCheckBoxItem(comboMenu, "ElZilean.Combo.Q") && Q.IsReady() && target.IsValidTarget(Q.Range) && !isBombed2.IsValidTarget(Q.Range))
                 {
@@ -403,6 +404,7 @@ namespace ElZilean
                         Utility.DelayAction.Add(50, () => Q.Cast(pred.CastPosition));
                     }
                 }
+                */
                 if (!Q.IsReady())
                 {
                     if (QDmg(target) >= target.Health + target.HPRegenRate && W.IsReady())
@@ -414,6 +416,7 @@ namespace ElZilean
                         W.Cast();
                     }
                 }
+                /*
                 // Check if target has a bomb
                 var isBombed = HeroManager.Enemies.Find(x => x.HasBuff("ZileanQEnemyBomb") && x.IsValidTarget(Q.Range));
                 if (!isBombed.IsValidTarget())
@@ -439,7 +442,7 @@ namespace ElZilean
                     if (!Q.IsReady())
                     W.Cast();
                 }
-
+                */
                 if (getCheckBoxItem(comboMenu, "ElZilean.Combo.E") && E.IsReady())
                 {
                     if (Player.GetEnemiesInRange(E.Range).Any())
@@ -457,7 +460,7 @@ namespace ElZilean
                         E.Cast(closestEnemy);
                     }
                 }
-
+                /*
                 if (getCheckBoxItem(comboMenu, "ElZilean.Ignite") && isBombed != null)
                 {
                     if (Player.GetSpellSlot("summonerdot") == SpellSlot.Unknown)
@@ -473,6 +476,7 @@ namespace ElZilean
                         }
                     }
                 }
+                */
             }
         }
 
@@ -547,10 +551,8 @@ namespace ElZilean
                 if (pred.HitChance >= EloBuddy.SDK.Enumerations.HitChance.High)
                 {   
                     Q.Cast(pred.CastPosition);
-                    Q.Cast(pred.CastPosition);
-                    Utility.DelayAction.Add(50, () => Q.Cast(pred.CastPosition));
                     W.Cast();
-                    Q.Cast(pred.CastPosition);
+                    
                 }
             }
         }
