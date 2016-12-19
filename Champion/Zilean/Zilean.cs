@@ -372,7 +372,7 @@ namespace ElZilean
             {
                 var target = TargetSelector.GetTarget(Q.Range, DamageType.Magical);
                 var pred666 = Q.GetPrediction(target);
-                if (getCheckBoxItem(comboMenu, "ElZilean.Combo.Q") && Q.IsReady() && target.IsValidTarget(Q.Range))
+                if (getCheckBoxItem(comboMenu, "ElZilean.Combo.Q") && target.IsValidTarget(Q.Range))
                 {
                     Q.Cast(pred666.CastPosition);
                     if (!Q.IsReady())
