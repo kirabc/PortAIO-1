@@ -372,7 +372,7 @@ namespace ElZilean
             {
                 var target = TargetSelector.GetTarget(Q.Range, DamageType.Magical);
                 var pred666 = Q.GetPrediction(target);
-                /*
+                
                 if (getCheckBoxItem(comboMenu, "ElZilean.Combo.E") && E.IsReady() && !Q.IsReady())
                 {
                     if (Player.GetEnemiesInRange(E.Range).Any())
@@ -390,7 +390,7 @@ namespace ElZilean
                         E.Cast(closestEnemy);
                     }
                 }
-                */
+                
                 if (getCheckBoxItem(comboMenu, "ElZilean.Combo.Q") && target.IsValidTarget(Q.Range))
                 {
                     Q.Cast(pred666.CastPosition);
