@@ -437,7 +437,7 @@ namespace ElZilean
                         {
                             E.Cast();
                         }
-                        W.Cast();
+                        
                     }
                 }
                 /*
