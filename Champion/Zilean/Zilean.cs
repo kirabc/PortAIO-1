@@ -573,7 +573,7 @@ namespace ElZilean
             {
                var pred666 = Q.GetPrediction(target);
                Q.Cast(pred666.CastPosition);
-                    if (!Q.IsReady())
+                    if (!Q.IsReady() && getCheckBoxItem(harassMenu, "ElZilean.Harass.W"))
                     { 
                         W.Cast();
                         Q.Cast(pred666.CastPosition);
