@@ -398,11 +398,19 @@ namespace ElZilean
                 
                 if (getCheckBoxItem(comboMenu, "ElZilean.Combo.Q") && target.IsValidTarget(Q.Range))
                 {
-                    Q.Cast(pred666.CastPosition);
+                    
+                    if (pred666.HitChance >= EloBuddy.SDK.Enumerations.HitChance.High)
+                    {
+                        Q.Cast(pred666.CastPosition);
+                    }
+                    
                     if (!Q.IsReady())
                     { 
-                        W.Cast();
-                        Q.Cast(pred666.CastPosition);
+                          W.Cast();
+                          if (pred666.HitChance >= EloBuddy.SDK.Enumerations.HitChance.High)
+                          {
+                            Q.Cast(pred666.CastPosition);
+                          }
                     }
                     return;
                 }
@@ -561,7 +569,7 @@ namespace ElZilean
         /// <summary>
         ///     Harass logic
         /// </summary>
-        private static void OnHarass()
+            private static void OnHarass()
         {
             var target = TargetSelector.GetTarget(Q.Range, DamageType.Magical);
             if (target == null)
@@ -569,16 +577,18 @@ namespace ElZilean
                 return;
             }
 
-            if (getCheckBoxItem(harassMenu, "ElZilean.Harass.Q") && target.LSIsValidTarget(Q.Range))
+            if (getCheckBoxItem(harassMenu, "ElZilean.Harass.Q") && Q.IsReady() && target.LSIsValidTarget(Q.Range))
             {
-               var pred666 = Q.GetPrediction(target);
-               Q.Cast(pred666.CastPosition);
-                    if (!Q.IsReady() && getCheckBoxItem(harassMenu, "ElZilean.Harass.W"))
-                    { 
-                        W.Cast();
-                        Q.Cast(pred666.CastPosition);
-                    }
-                    return;
+                var pred = Q.GetPrediction(target);
+                if (pred.HitChance >= EloBuddy.SDK.Enumerations.HitChance.High)
+                {
+                    Q.Cast(pred.CastPosition);
+                }
+            }
+
+            if (getCheckBoxItem(harassMenu, "ElZilean.Harass.W") && W.IsReady() && !Q.IsReady())
+            {
+                W.Cast();
             }
         }
 
