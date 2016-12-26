@@ -398,15 +398,11 @@ namespace ElZilean
                 
                 if (getCheckBoxItem(comboMenu, "ElZilean.Combo.Q") && target.IsValidTarget(Q.Range))
                 {
-                    
-                   Q.Cast(pred666.CastPosition);
-                                     
+                    Q.Cast(pred666.CastPosition);
                     if (!Q.IsReady())
                     { 
                           W.Cast();
-                          
-                            Q.Cast(pred666.CastPosition);
-                          
+                          Q.Cast(pred666.CastPosition);
                     }
                     return;
                 }
