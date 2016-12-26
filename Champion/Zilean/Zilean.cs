@@ -399,18 +399,14 @@ namespace ElZilean
                 if (getCheckBoxItem(comboMenu, "ElZilean.Combo.Q") && target.IsValidTarget(Q.Range))
                 {
                     
-                    if (pred666.HitChance >= EloBuddy.SDK.Enumerations.HitChance.High)
-                    {
-                        Q.Cast(pred666.CastPosition);
-                    }
-                    
+                   Q.Cast(pred666.CastPosition);
+                                     
                     if (!Q.IsReady())
                     { 
                           W.Cast();
-                          if (pred666.HitChance >= EloBuddy.SDK.Enumerations.HitChance.High)
-                          {
+                          
                             Q.Cast(pred666.CastPosition);
-                          }
+                          
                     }
                     return;
                 }
