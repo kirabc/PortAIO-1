@@ -4,7 +4,6 @@ using System;
 using LeagueSharp;
 using LeagueSharp.Common;
 using EloBuddy;
-using EloBuddy.SDK.Events;
 
 #endregion
 
