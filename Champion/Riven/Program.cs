@@ -4,6 +4,7 @@ using System;
 using LeagueSharp;
 using LeagueSharp.Common;
 using EloBuddy;
+using EloBuddy.SDK.Events;
 
 #endregion
 
@@ -11,9 +12,9 @@ using EloBuddy;
 {
     public class Program
     {
-        public static void Init()
+       static void Main(string[] args)
         {
-            CustomEvents.Game.OnGameLoad += OnLoad;
+            Loading.OnLoadingComplete += GameLoaded;
         }
 
         private static void OnLoad(EventArgs args)
@@ -24,6 +25,9 @@ using EloBuddy;
                 return;
             }
            Load.Load.LoadAssembly();
+           Events.Initialize();
+           Config.Initialize();
+           Spells.Initialize();
         }
     }
 }
