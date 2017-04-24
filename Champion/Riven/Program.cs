@@ -13,7 +13,7 @@ using EloBuddy;
     {
        public static void Init()
         {
-            Loading.OnLoadingComplete += GameLoaded;
+           CustomEvents.Game.OnGameLoad += OnLoad;
         }
 
         private static void OnLoad(EventArgs args)
