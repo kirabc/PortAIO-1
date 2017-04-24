@@ -25,9 +25,6 @@ using EloBuddy.SDK.Events;
                 return;
             }
            Load.Load.LoadAssembly();
-           Events.Initialize();
-           Config.Initialize();
-           Spells.Initialize();
-        }
+         }
     }
 }
