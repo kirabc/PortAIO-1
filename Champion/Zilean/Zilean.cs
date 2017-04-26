@@ -364,8 +364,7 @@ namespace ElZilean
                         W.Cast();
                     }
                     return;
-                
-            }
+             }
         }
 
         /// <summary>
